@@ -13,17 +13,17 @@ import lombok.Setter;
 public class BoardPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	private String title;
-	private String author;
-	private String postDate;
-	private int views;
-	private int comments; // 댓글
-	private String commentContent; // 댓글 내용
-	private String content; // 게시글 내용 
-	private String lastModifiedDate; // 수정일
-	private String status; // 상태 
-	private String userId;
+    private Long id;
+    private String title;
+    private String author;
+    private String postDate;
+    private int views;
+    private int comments; // 댓글 수
+    private String commentContent; // 마지막 댓글 내용
+    private String content; // 게시글 내용 
+    private String lastModifiedDate; // 수정일
+    private String status; // 상태 
+    private String userId;
 
 }
   
