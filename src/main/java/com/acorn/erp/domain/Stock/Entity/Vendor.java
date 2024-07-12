@@ -20,7 +20,7 @@ public class Vendor {
     @Column(name = "vendor_name", length = 9)
     private String vendorName;
 
-    @Column(name = "vendor_p", length = 11)
+    @Column(name = "vendor_p", length = 18)
     private String vendorContact;
 
     @Column(name = "vendor_addr", length = 90)
