@@ -1,47 +1,37 @@
 package com.acorn.erp.domain.Login.Repository;
 
-
+import com.acorn.erp.domain.Login.Entity.UserInfo;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-
-import com.acorn.erp.domain.Login.Entity.*;
-
 @Mapper
 public interface UserInfoMapper {
-	
-	 @Select("SELECT * FROM USERINFO")
-	    List<userInfo> getAllUserInfo();
-	
-	 @Select("SELECT u FROM userinfo WHERE registrationNum = #{registrationNum} AND email = #{email}")
-	 String getFindPw(@Param("registrationNum") String registrationNum, @Param("email") String email);
-	
-	 @Select("SELECT * FROM userInfo where email = #{email}")
-	 userInfo getUserByEmail(String email);
-	 	
-	 
-	@Insert("insert into userInfo(email, password, shopName, registrationNum) values(#{email}, #{password}, #{shopName}, #{registrationNum})")
-	void insertUserInfo(userInfo userinfo); 
-	
-	@Delete("DELETE FROM userinfo WHERE email =#{email}")
-    void deleteUserInfo(String email);
-	
-	@Update("UPDATE userInfo SET password = #{password} WHERE email =#{email}")
-	void updateUserInfo(userInfo userinfo);
-	
-	//로그인 구현
-	@Select("SELECT * FROM USERINFO WHERE email = #{email} AND password = #{password}")
-    userInfo getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
-	
-	@Select("SELECT shopname from userInfo WHERE email =#{email}")
-	 String getShopname(String email);
-	
+    @Select("SELECT * FROM user_info")
+    List<UserInfo> getAllUserInfo();
+
+    @Select("SELECT * FROM user_info WHERE registrationNum = #{registrationNum} AND email = #{email}")
+    UserInfo getFindPw(@Param("registrationNum") String registrationNum, @Param("email") String email);
+
+    @Select("SELECT * FROM user_info WHERE email = #{email}")
+    UserInfo getUserByEmail(String email);
+
+    @Insert("INSERT INTO user_info(email, password, shop_name, registration_num) " +
+            "VALUES(#{email}, #{password}, #{shopName}, #{registrationNum})")
+    void insertUserInfo(UserInfo userInfo);
+
+    @Delete("DELETE FROM user_info WHERE email = #{email}")
+    void deleteUserInfo(String email);
+
+    @Update("UPDATE user_info SET password = #{password}, shop_name = #{shopName}, registration_num = #{registrationNum} " +
+            "WHERE email = #{email}")
+    void updateUserInfo(UserInfo userInfo);
+
+    // 로그인 구현
+    @Select("SELECT * FROM user_info WHERE email = #{email} AND password = #{password}")
+    UserInfo getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
+    @Select("SELECT shop_name FROM user_info WHERE email = #{email}")
+    String getShopName(String email);
 }

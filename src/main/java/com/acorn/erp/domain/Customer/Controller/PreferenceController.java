@@ -33,27 +33,27 @@ public class PreferenceController {
         service.calculateOrderData();
         return "Customer preference data calculated and inserted successfully";
     }
-    @GetMapping("/getListProdTable")
-    public List<CustomerPreferenceData> getListProdTable() {
-    	return service.getCustomerPreferences();
-    }
+//    @GetMapping("/getListProdTable")
+//    public List<CustomerPreferenceData> getListProdTable() {
+//    	return service.getCustomerPreferences();
+//    }
     @PostMapping("/getListProdTable")
     public  Page<CustomerPreferenceData> getListProdPageInfo(Pageable pageable) {
     	Page<CustomerPreferenceData> preferenceData = repository.findAll(pageable);
     	return preferenceData;
     }
-    @GetMapping("/getTop3ByTotalAmount")
-    public List<CustomerPreferenceData> getTop3ByTotalAmount() {
-        return service.getTop3ByTotalAmount();
-    }
-    @GetMapping("/getTop3ByTotalCount")
-    public List<CustomerPreferenceData> getTop3ByTotalCount() {
-        return service.getTop3ByTotalCount();
-    }
-    @GetMapping("/getTop3ByRating")
-    public List<CustomerPreferenceData> getTop3ByRating() {
-        return service.getTop3ByRating();
-    }
+//    @GetMapping("/getTop3ByTotalAmount")
+//    public List<CustomerPreferenceData> getTop3ByTotalAmount() {
+//        return service.getTop3ByTotalAmount();
+//    }
+//    @GetMapping("/getTop3ByTotalCount")
+//    public List<CustomerPreferenceData> getTop3ByTotalCount() {
+//        return service.getTop3ByTotalCount();
+//    }
+//    @GetMapping("/getTop3ByRating")
+//    public List<CustomerPreferenceData> getTop3ByRating() {
+//        return service.getTop3ByRating();
+//    }
     @GetMapping("/searchKeywordPreferenceData")
 	public List<CustomerPreferenceData> searchCustomerPreferenceDataByKeyword(@RequestParam("keyword")String keyword) {
         return repository.searchCustomerPreferenceDataByKeyword(keyword);

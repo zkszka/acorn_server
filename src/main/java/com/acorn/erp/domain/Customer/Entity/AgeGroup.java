@@ -11,57 +11,29 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Entity
-@Table(name = "AGE_GROUP",
-uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "ageGroup"})}
-)
+@Table(name = "AGE_GROUP", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"customer_id", "age_group"})
+})
+@Data // Lombok을 사용하여 Getter, Setter, toString 등을 자동 생성합니다.
 public class AgeGroup {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "age_group_seq")
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "age_group_seq")
     @SequenceGenerator(name = "age_group_seq", sequenceName = "age_group_seq", allocationSize = 1)
-	private int agegroupId;
-	@Column(nullable = false)
-	private int customerId;
-	
-	private String ageGroup;
-	
-	public int getAgegroupId() {
-		return agegroupId;
-	}
+    @Column(name = "age_group_id")
+    private int ageGroupId;
 
-	public void setAgegroupId(int agegroupId) {
-		this.agegroupId = agegroupId;
-	}
+    @Column(name = "customer_id", nullable = false)
+    private int customerId;
 
-	public int getCustomerId() {
-		return customerId;
-	}
+    @Column(name = "age_group")
+    private String ageGroup;
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+    // 생성자를 비워두면 기본 생성자가 자동으로 생성됩니다.
+    // 다른 생성자가 필요한 경우에만 직접 추가합니다.
 
-	public String getAgeGroup() {
-		return ageGroup;
-	}
-
-	public void setAgeGroup(String ageGroup) {
-		this.ageGroup = ageGroup;
-	}
-
-	public AgeGroup() {}
-
-	@Override
-	public String toString() {
-		return "AgeGroup [agegroupId=" + agegroupId + ", customerId=" + customerId + ", ageGroup=" + ageGroup + "]";
-	}
-
-	public AgeGroup(int agegroupId, int customerId, String ageGroup) {
-		super();
-		this.agegroupId = agegroupId;
-		this.customerId = customerId;
-		this.ageGroup = ageGroup;
-	}
-
-
-
+    @Override
+    public String toString() {
+        return "AgeGroup [ageGroupId=" + ageGroupId + ", customerId=" + customerId + ", ageGroup=" + ageGroup + "]";
+    }
 }

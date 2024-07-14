@@ -1,119 +1,80 @@
 package com.acorn.erp.domain.Customer.Entity;
 
-import java.sql.Date;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "CUSTOMER_PREFERENCE_DATA")
+@Table(
+    name = "CUSTOMER_PREFERENCE_DATA",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"preference_data_id"})}
+)
+@Getter
+@Setter
+@NoArgsConstructor // Lombok을 사용하여 기본 생성자 생성
 public class CustomerPreferenceData {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_preference_data_seq")
-    @SequenceGenerator(name = "customer_preference_data_seq", sequenceName = "customer_preference_data_seq", allocationSize = 1)
-	private int preferenceDataId;
-	private String itemName; //FK 변수명확인
-	private int totalAmountForProduct;
-	private int totalCountForProduct;
-	private double rating ;
-	private String genderPreference;
-	private String agePreference; 
-	private String regionPreference_province; 
-	private String regionPreference_city; 
-	private String regionPreference_town;
-	  // 기본 생성자 추가
-    public CustomerPreferenceData() {
-    }
-	public CustomerPreferenceData(int preferenceDataId, String itemName, int totalAmountForProduct,
-			int totalCountForProduct, double rating, String genderPreference, String agePreference,
-			String regionPreference_province, String regionPreference_city, String regionPreference_town) {
-		super();
-		this.preferenceDataId = preferenceDataId;
-		this.itemName = itemName;
-		this.totalAmountForProduct = totalAmountForProduct;
-		this.totalCountForProduct = totalCountForProduct;
-		this.rating = rating;
-		this.genderPreference = genderPreference;
-		this.agePreference = agePreference;
-		this.regionPreference_province = regionPreference_province;
-		this.regionPreference_city = regionPreference_city;
-		this.regionPreference_town = regionPreference_town;
-	}
-	@Override
-	public String toString() {
-		return "CustomerPreferenceData [preferenceDataId=" + preferenceDataId + ", itemName=" + itemName
-				+ ", totalAmountForProduct=" + totalAmountForProduct + ", totalCountForProduct=" + totalCountForProduct
-				+ ", rating=" + rating + ", genderPreference=" + genderPreference + ", agePreference=" + agePreference
-				+ ", regionPreference_province=" + regionPreference_province + ", regionPreference_city="
-				+ regionPreference_city + ", regionPreference_town=" + regionPreference_town + "]";
-	}
-	public int getPreferenceDataId() {
-		return preferenceDataId;
-	}
-	public void setPreferenceDataId(int preferenceDataId) {
-		this.preferenceDataId = preferenceDataId;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public int getTotalAmountForProduct() {
-		return totalAmountForProduct;
-	}
-	public void setTotalAmountForProduct(int totalAmountForProduct) {
-		this.totalAmountForProduct = totalAmountForProduct;
-	}
-	public int getTotalCountForProduct() {
-		return totalCountForProduct;
-	}
-	public void setTotalCountForProduct(int totalCountForProduct) {
-		this.totalCountForProduct = totalCountForProduct;
-	}
-	public double getRating() {
-		return rating;
-	}
-	public void setRating(double rating) {
-		this.rating = rating;
-	}
-	public String getGenderPreference() {
-		return genderPreference;
-	}
-	public void setGenderPreference(String genderPreference) {
-		this.genderPreference = genderPreference;
-	}
-	public String getAgePreference() {
-		return agePreference;
-	}
-	public void setAgePreference(String agePreference) {
-		this.agePreference = agePreference;
-	}
-	public String getRegionPreference_province() {
-		return regionPreference_province;
-	}
-	public void setRegionPreference_province(String regionPreference_province) {
-		this.regionPreference_province = regionPreference_province;
-	}
-	public String getRegionPreference_city() {
-		return regionPreference_city;
-	}
-	public void setRegionPreference_city(String regionPreference_city) {
-		this.regionPreference_city = regionPreference_city;
-	}
-	public String getRegionPreference_town() {
-		return regionPreference_town;
-	}
-	public void setRegionPreference_town(String regionPreference_town) {
-		this.regionPreference_town = regionPreference_town;
-	} 
-	
 
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 IDENTITY 전략을 사용합니다.
+    @Column(name = "preference_data_id")
+    private int preferenceDataId;
+    
+    @Column(name = "item_name")
+    private String itemName;
+    
+    @Column(name = "total_amount_for_product")
+    private int totalAmountForProduct;
+    
+    @Column(name = "total_count_for_product")
+    private int totalCountForProduct;
+    
+    @Column(name = "rating")
+    private double rating;
+    
+    @Column(name = "gender_preference")
+    private String genderPreference;
+    
+    @Column(name = "age_preference")
+    private String agePreference;
+    
+    @Column(name = "region_preference_province")
+    private String regionPreferenceProvince;
+    
+    @Column(name = "region_preference_city")
+    private String regionPreferenceCity;
+    
+    @Column(name = "region_preference_town")
+    private String regionPreferenceTown;
+
+    // 생성자, Getter, Setter, toString 등은 Lombok의 어노테이션에 의해 자동 생성됩니다.
+
+    @Override
+    public String toString() {
+        return "CustomerPreferenceData [preferenceDataId=" + preferenceDataId + ", itemName=" + itemName
+                + ", totalAmountForProduct=" + totalAmountForProduct + ", totalCountForProduct=" + totalCountForProduct
+                + ", rating=" + rating + ", genderPreference=" + genderPreference + ", agePreference=" + agePreference
+                + ", regionPreferenceProvince=" + regionPreferenceProvince + ", regionPreferenceCity="
+                + regionPreferenceCity + ", regionPreferenceTown=" + regionPreferenceTown + "]";
+    }
+
+    public CustomerPreferenceData(String itemName, int totalAmountForProduct, int totalCountForProduct,
+            double rating, String genderPreference, String agePreference, String regionPreferenceProvince,
+            String regionPreferenceCity, String regionPreferenceTown) {
+        this.itemName = itemName;
+        this.totalAmountForProduct = totalAmountForProduct;
+        this.totalCountForProduct = totalCountForProduct;
+        this.rating = rating;
+        this.genderPreference = genderPreference;
+        this.agePreference = agePreference;
+        this.regionPreferenceProvince = regionPreferenceProvince;
+        this.regionPreferenceCity = regionPreferenceCity;
+        this.regionPreferenceTown = regionPreferenceTown;
+    }
 }

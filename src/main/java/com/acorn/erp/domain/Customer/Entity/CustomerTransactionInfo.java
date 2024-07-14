@@ -1,148 +1,148 @@
 package com.acorn.erp.domain.Customer.Entity;
 
-
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-
 @Entity
-@Table(name = "CUSTOMER_TRANSACTION_INFO",
-uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "transactionInfoId"})}
+@Table(
+    name = "CUSTOMER_TRANSACTION_INFO",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "transactionInfoId"})}
 )
 public class CustomerTransactionInfo {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_transaction_data_seq")
-    @SequenceGenerator(name = "customer_transaction_data_seq", sequenceName = "customer_transaction_data_seq", allocationSize = 1)
-	private int transactionInfoId;
-	@Column(nullable = false)
-	private int customerId;
-	private String customerName;
-	private LocalDateTime lastTransactionDate;
-	private int totalAmountForCustomer;
-	private String topSellingProduct; //FK 변수명확인: itemName
-	private  int totalCountForCustomer;
-	private String mostPurchasedProduct; //FK 변수명확인: itemName
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 IDENTITY 전략을 사용합니다.
+    @Column(name = "transactionInfoId")
+    private int transactionInfoId;
+
+    @Column(nullable = false)
+    private int customerId;
+
+    private String customerName;
+
+    @Column(name = "lastTransactionDate")
+    private LocalDateTime lastTransactionDate;
+
+    @Column(name = "totalAmountForCustomer")
+    private int totalAmountForCustomer;
+
+    @Column(name = "topSellingProduct")
+    private String topSellingProduct;
+
+    @Column(name = "totalCountForCustomer")
+    private int totalCountForCustomer;
+
+    @Column(name = "mostPurchasedProduct")
+    private String mostPurchasedProduct;
+
+    @Column(name = "prevRank_amount")
     private Integer prevRank_amount;
+
+    @Column(name = "prevRank_count")
     private Integer prevRank_count;
-	
 
-	public Integer getPrevRank_amount() {
-		return prevRank_amount;
-	}
+    public CustomerTransactionInfo() {
+    }
 
-	public void setPrevRank_amount(Integer prevRank_amount) {
-		this.prevRank_amount = prevRank_amount;
-	}
+    public int getTransactionInfoId() {
+        return transactionInfoId;
+    }
 
-	public Integer getPrevRank_count() {
-		return prevRank_count;
-	}
+    public void setTransactionInfoId(int transactionInfoId) {
+        this.transactionInfoId = transactionInfoId;
+    }
 
-	public void setPrevRank_count(Integer prevRank_count) {
-		this.prevRank_count = prevRank_count;
-	}
+    public int getCustomerId() {
+        return customerId;
+    }
 
-	public int getTransactionInfoId() {
-		return transactionInfoId;
-	}
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
-	public void setTransactionInfoId(int transactionInfoId) {
-		this.transactionInfoId = transactionInfoId;
-	}
+    public String getCustomerName() {
+        return customerName;
+    }
 
-	public int getCustomerId() {
-		return customerId;
-	}
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+    public LocalDateTime getLastTransactionDate() {
+        return lastTransactionDate;
+    }
 
-	public String getCustomerName() {
-		return customerName;
-	}
+    public void setLastTransactionDate(LocalDateTime lastTransactionDate) {
+        this.lastTransactionDate = lastTransactionDate;
+    }
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
+    public int getTotalAmountForCustomer() {
+        return totalAmountForCustomer;
+    }
 
-	public LocalDateTime getLastTransactionDate() {
-		return lastTransactionDate;
-	}
+    public void setTotalAmountForCustomer(int totalAmountForCustomer) {
+        this.totalAmountForCustomer = totalAmountForCustomer;
+    }
 
-	public void setLastTransactionDate(LocalDateTime lastTransactionDate) {
-		this.lastTransactionDate = lastTransactionDate;
-	}
+    public String getTopSellingProduct() {
+        return topSellingProduct;
+    }
 
-	public int getTotalAmountForCustomer() {
-		return totalAmountForCustomer;
-	}
+    public void setTopSellingProduct(String topSellingProduct) {
+        this.topSellingProduct = topSellingProduct;
+    }
 
-	public void setTotalAmountForCustomer(int totalAmountForCustomer) {
-		this.totalAmountForCustomer = totalAmountForCustomer;
-	}
+    public int getTotalCountForCustomer() {
+        return totalCountForCustomer;
+    }
 
-	public String getTopSellingProduct() {
-		return topSellingProduct;
-	}
+    public void setTotalCountForCustomer(int totalCountForCustomer) {
+        this.totalCountForCustomer = totalCountForCustomer;
+    }
 
-	public void setTopSellingProduct(String topSellingProduct) {
-		this.topSellingProduct = topSellingProduct;
-	}
+    public String getMostPurchasedProduct() {
+        return mostPurchasedProduct;
+    }
 
-	public int getTotalCountForCustomer() {
-		return totalCountForCustomer;
-	}
+    public void setMostPurchasedProduct(String mostPurchasedProduct) {
+        this.mostPurchasedProduct = mostPurchasedProduct;
+    }
 
-	public void setTotalCountForCustomer(int totalCountForCustomer) {
-		this.totalCountForCustomer = totalCountForCustomer;
-	}
+    public Integer getPrevRank_amount() {
+        return prevRank_amount;
+    }
 
-	public String getMostPurchasedProduct() {
-		return mostPurchasedProduct;
-	}
+    public void setPrevRank_amount(Integer prevRank_amount) {
+        this.prevRank_amount = prevRank_amount;
+    }
 
-	public void setMostPurchasedProduct(String mostPurchasedProduct) {
-		this.mostPurchasedProduct = mostPurchasedProduct;
-	}
+    public Integer getPrevRank_count() {
+        return prevRank_count;
+    }
 
-	public CustomerTransactionInfo() {}
+    public void setPrevRank_count(Integer prevRank_count) {
+        this.prevRank_count = prevRank_count;
+    }
 
-	@Override
-	public String toString() {
-		return "CustomerTransactionInfo [transactionInfoId=" + transactionInfoId + ", customerId=" + customerId
-				+ ", cutomerName=" + customerName + ", lastTransactionDate=" + lastTransactionDate
-				+ ", totalAmountForCustomer=" + totalAmountForCustomer + ", topSellingProduct=" + topSellingProduct
-				+ ", totalCountForCustomer=" + totalCountForCustomer + ", mostPurchasedProduct=" + mostPurchasedProduct
-				+ "]";
-	}
-
-	public CustomerTransactionInfo(int transactionInfoId, int customerId, String customerName, LocalDateTime lastTransactionDate,
-			int totalAmountForCustomer, String topSellingProduct, int totalCountForCustomer,
-			String mostPurchasedProduct) {
-		super();
-		this.transactionInfoId = transactionInfoId;
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.lastTransactionDate = lastTransactionDate;
-		this.totalAmountForCustomer = totalAmountForCustomer;
-		this.topSellingProduct = topSellingProduct;
-		this.totalCountForCustomer = totalCountForCustomer;
-		this.mostPurchasedProduct = mostPurchasedProduct;
-	}
-
-	
-
-
-	
+    @Override
+    public String toString() {
+        return "CustomerTransactionInfo{" +
+                "transactionInfoId=" + transactionInfoId +
+                ", customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
+                ", lastTransactionDate=" + lastTransactionDate +
+                ", totalAmountForCustomer=" + totalAmountForCustomer +
+                ", topSellingProduct='" + topSellingProduct + '\'' +
+                ", totalCountForCustomer=" + totalCountForCustomer +
+                ", mostPurchasedProduct='" + mostPurchasedProduct + '\'' +
+                ", prevRank_amount=" + prevRank_amount +
+                ", prevRank_count=" + prevRank_count +
+                '}';
+    }
 }

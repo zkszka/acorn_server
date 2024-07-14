@@ -4,19 +4,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpSession;
 
 import com.acorn.erp.domain.Board.Entity.BoardPost;
 import com.acorn.erp.domain.Board.Service.BoardPostService;
-import com.acorn.erp.domain.Login.Entity.userInfo;
-
-import jakarta.servlet.http.HttpSession;
+import com.acorn.erp.domain.Login.Entity.UserInfo; // UserInfo 클래스를 임포트
 
 @RestController
 @RequestMapping("/api/board")
@@ -54,7 +51,7 @@ public class BoardPostController {
     // 게시물 등록
     @PostMapping("/posts")
     public ResponseEntity<BoardPost> createBoardPost(@RequestBody BoardPost boardPost, HttpSession session) {
-        userInfo userInfo = (userInfo) session.getAttribute("user");
+        UserInfo userInfo = (UserInfo) session.getAttribute("user"); // UserInfo 클래스로 캐스팅
         if (userInfo != null) {
             // 세션에서 사용자 정보 가져와서 게시물에 추가
             boardPost.setUserId(userInfo.getShopName());

@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,77 +14,50 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "CUSTOMER_INFO")
+@Getter
+@Setter
+@NoArgsConstructor // Lombok을 사용하여 기본 생성자 생성
 public class CustomerInfo {
-	public CustomerInfo() {}
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_info_seq")
-    @SequenceGenerator(name = "customer_info_seq", sequenceName = "customer_info_seq", allocationSize = 1)
-	private Integer customerId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 IDENTITY 전략을 사용합니다.
+    @Column(name = "customer_id")
+    private Integer customerId;
+
     @Column(name = "customer_name", length = 30)
-	private String customerName;
-	private String customerGender;
-	private Date customerBirthDate;
-	private String customerAddr;
-	private String customerTel;
-	private Date registerDate;
-	
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-	public String getCustomerGender() {
-		return customerGender;
-	}
-	public void setCustomerGender(String customerGender) {
-		this.customerGender = customerGender;
-	}
-	public Date getCustomerBirthDate() {
-		return customerBirthDate;
-	}
-	public void setCustomerBirthDate(Date customerBirthDate) {
-		this.customerBirthDate = customerBirthDate;
-	}
-	public String getCustomerAddr() {
-		return customerAddr;
-	}
-	public void setCustomerAddr(String customerAddr) {
-		this.customerAddr = customerAddr;
-	}
-	public String getCustomerTel() {
-		return customerTel;
-	}
-	public void setCustomerTel(String customerTel) {
-		this.customerTel = customerTel;
-	}
-	public Date getRegisterDate() {
-		return registerDate;
-	}
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
-	}
-	@Override
-	public String toString() {
-		return "CustomerInfo [customerId=" + customerId + ", customerName=" + customerName + ", customerGender="
-				+ customerGender + ", customerBirthDate=" + customerBirthDate + ", customerAddr=" + customerAddr
-				+ ", customerTel=" + customerTel + ", registerDate=" + registerDate + "]";
-	}
-	public CustomerInfo(int customerId, String customerName, String customerGender, Date customer_birthDate,
-			String customerAddr, String customerTel, Date registerDate) {
-		super();
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.customerGender = customerGender;
-		this.customerBirthDate = customerBirthDate;
-		this.customerAddr = customerAddr;
-		this.customerTel = customerTel;
-		this.registerDate = registerDate;
-	}
+    private String customerName;
+
+    @Column(name = "customer_gender")
+    private String customerGender;
+
+    @Column(name = "customer_birth_date")
+    private Date customerBirthDate;
+
+    @Column(name = "customer_addr")
+    private String customerAddr;
+
+    @Column(name = "customer_tel")
+    private String customerTel;
+
+    @Column(name = "register_date")
+    private Date registerDate;
+
+    // 생성자, Getter, Setter, toString 등은 Lombok의 어노테이션에 의해 자동 생성됩니다.
+
+    @Override
+    public String toString() {
+        return "CustomerInfo [customerId=" + customerId + ", customerName=" + customerName + ", customerGender="
+                + customerGender + ", customerBirthDate=" + customerBirthDate + ", customerAddr=" + customerAddr
+                + ", customerTel=" + customerTel + ", registerDate=" + registerDate + "]";
+    }
+
+    public CustomerInfo(String customerName, String customerGender, Date customerBirthDate, String customerAddr,
+            String customerTel, Date registerDate) {
+        this.customerName = customerName;
+        this.customerGender = customerGender;
+        this.customerBirthDate = customerBirthDate;
+        this.customerAddr = customerAddr;
+        this.customerTel = customerTel;
+        this.registerDate = registerDate;
+    }
 }

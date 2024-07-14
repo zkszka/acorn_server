@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -24,7 +23,8 @@ import lombok.Setter;
 @Table(name = "SALES_RETURN")
 public class ReturnTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "no")
     private Long no;
 
     @Column(name = "order_num", nullable = false)
@@ -33,16 +33,13 @@ public class ReturnTable {
     @Column(name = "return_type", length = 10)
     private String returnType;
 
-//    @ManyToOne
-//    @JoinColumn(name = "item_name")
-//    private ItemTable itemTable;
-//
-//    @ManyToOne
-//    @JoinColumns({
-//        @JoinColumn(name = "customer_name", referencedColumnName = "name"),
-//        @JoinColumn(name = "customer_tel", referencedColumnName = "tel")
-//    })
-//    private CustomerInfo customerInfo;
+    @ManyToOne
+    @JoinColumn(name = "item_name")
+    private ItemTable itemTable;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerInfo customerInfo;
 
     @Column(name = "return_qty")
     private Integer returnQty;
@@ -59,4 +56,23 @@ public class ReturnTable {
 
     @Column(name = "return_status", length = 10)
     private String returnStatus;
+
+    // 기본 생성자
+    public ReturnTable() {}
+
+    // 생성자
+    public ReturnTable(Long orderNum, String returnType, ItemTable itemTable, CustomerInfo customerInfo, Integer returnQty,
+            Long returnTotalPrice, Date returnDate, String returnReason, String returnStatus) {
+        this.orderNum = orderNum;
+        this.returnType = returnType;
+        this.itemTable = itemTable;
+        this.customerInfo = customerInfo;
+        this.returnQty = returnQty;
+        this.returnTotalPrice = returnTotalPrice;
+        this.returnDate = returnDate;
+        this.returnReason = returnReason;
+        this.returnStatus = returnStatus;
+    }
+
+    // Getter 및 Setter (생략 가능)
 }
