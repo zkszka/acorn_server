@@ -6,94 +6,85 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "SALES_INVENTORY")
+@Table(name = "inventory_table")
 public class InventoryTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "no")
     private Long no;
     
-    @Column(name = "item_code")
+    @Column(name = "item_code", nullable = false)
     private Long itemCode;
 
-    @Column(name = "item_name", length = 30)
+    @Column(name = "item_name", length = 30, nullable = false)
     private String itemName;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "item_code", referencedColumnName = "item_code", insertable = false, updatable = false)
-//    private ItemTable itemTable;
-
-//    @Column(name = "stock_in")
-//    private Integer  stockIn = 0;
-    
     @Column(name = "item_qty")
     private Integer itemQty;
 
     @Column(name = "stock_out")
-    private Integer  stockOut;
+    private Integer stockOut;
 
     @Column(name = "stock_qty")
-    private Integer  stockQty;
+    private Integer stockQty;
     
     // 기본 생성자
     public InventoryTable() {}
 
-	public Long getNo() {
-		return no;
-	}
+    // Getter 및 Setter (일부 생략 가능)
 
-	public void setNo(Long no) {
-		this.no = no;
-	}
+    public Long getNo() {
+        return no;
+    }
 
-	public Long getItemCode() {
-		return itemCode;
-	}
+    public void setNo(Long no) {
+        this.no = no;
+    }
 
-	public void setItemCode(Long itemCode) {
-		this.itemCode = itemCode;
-	}
+    public Long getItemCode() {
+        return itemCode;
+    }
 
-	public String getItemName() {
-		return itemName;
-	}
+    public void setItemCode(Long itemCode) {
+        this.itemCode = itemCode;
+    }
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
+    public String getItemName() {
+        return itemName;
+    }
 
-	public Integer getItemQty() {
-		return itemQty;
-	}
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
-	public void setItemQty(Integer itemQty) {
-		this.itemQty = itemQty;
-	}
+    public Integer getItemQty() {
+        return itemQty;
+    }
 
-	public Integer getStockOut() {
-		return stockOut;
-	}
+    public void setItemQty(Integer itemQty) {
+        this.itemQty = itemQty;
+    }
 
-	public void setStockOut(Integer stockOut) {
-		this.stockOut = stockOut;
-	}
+    public Integer getStockOut() {
+        return stockOut;
+    }
 
-	public Integer getStockQty() {
-		return stockQty;
-	}
+    public void setStockOut(Integer stockOut) {
+        this.stockOut = stockOut;
+    }
 
-	public void setStockQty(Integer stockQty) {
-		this.stockQty = stockQty;
-	}
-	
+    public Integer getStockQty() {
+        return stockQty;
+    }
+
+    public void setStockQty(Integer stockQty) {
+        this.stockQty = stockQty;
+    }
+    
     // calculateStockQty 메서드 추가
     public void calculateStockQty() {
         this.stockQty = this.itemQty - this.stockOut;
     }
-
 }

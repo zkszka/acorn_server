@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Entity
 public class BoardPost {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 AUTO_INCREMENT를 사용
     private Long id;
     private String title;
     private String author;
@@ -25,5 +25,5 @@ public class BoardPost {
     private String status; // 상태 
     private String userId;
 
+    // 생성자, getter, setter 등 필요한 코드 추가
 }
-  

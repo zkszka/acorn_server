@@ -5,63 +5,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Entity
 @Table(
-		name = "CUSTOMER_GRADE",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "customerGrade"})}
-		)
+    name = "CUSTOMER_GRADE",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"customer_id", "customer_grade"})}
+)
+@Data // Lombok을 사용하여 Getter, Setter, toString 등을 자동 생성합니다.
 public class CustomerGrade {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_grade_seq")
-    @SequenceGenerator(name = "customer_grade_seq", sequenceName = "customer_grade_seq", allocationSize = 1)
-	private int gradeId;
-	
-	@Column(nullable = false)
-	private int customerId;
-	
-	private String customerGrade = "일반";
-	
-	public int getGradeId() {
-		return gradeId;
-	}
-
-	public void setGradeId(int gradeId) {
-		this.gradeId = gradeId;
-	}
-
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public String getCustomerGrade() {
-		return customerGrade;
-	}
-
-	public void setCustomerGrade(String customerGrade) {
-		this.customerGrade = customerGrade;
-	}
-
-	public CustomerGrade() {}
-
-	@Override
-	public String toString() {
-		return "CustomerGrade [gradeId=" + gradeId + ", customerId=" + customerId + ", customerGrade=" + customerGrade
-				+ "]";
-	}
-
-	public CustomerGrade(int customerId) {
-		this.customerId = customerId;
-		this.customerGrade = "일반";
-	}
-
-	
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 IDENTITY 전략을 사용합니다.
+    @Column(name = "grade_id")
+    private int gradeId;
+    
+    @Column(name = "customer_id", nullable = false)
+    private int customerId;
+    
+    @Column(name = "customer_grade")
+    private String customerGrade = "일반"; // 기본값으로 "일반"을 설정합니다.
+    
+    // 생성자, Getter, Setter, toString 등은 Lombok의 @Data 어노테이션에 의해 자동 생성됩니다.
+    public CustomerGrade() {
+    }
+    
+    public CustomerGrade(Integer customerId) {
+        this.customerId = customerId;
+    }
 }

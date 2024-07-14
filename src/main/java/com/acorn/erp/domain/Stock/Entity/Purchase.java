@@ -1,24 +1,24 @@
 package com.acorn.erp.domain.Stock.Entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
+@Table(name = "purchase")
 public class Purchase {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long purchaseCode;
 
-    @Column(name = "purchase_unit")
+    @Column(name = "purchase_unit", length = 20)
     private String purchaseUnit;
 
     @Column(name = "purchase_name", length = 21)
@@ -36,4 +36,18 @@ public class Purchase {
     @Column(name = "remark", length = 300)
     private String remark;
 
+    // 기본 생성자
+    public Purchase() {}
+
+    // 생성자
+    public Purchase(String purchaseUnit, String purchaseName, String orderDate, Long orderQty, Long price, String remark) {
+        this.purchaseUnit = purchaseUnit;
+        this.purchaseName = purchaseName;
+        this.orderDate = orderDate;
+        this.orderQty = orderQty;
+        this.price = price;
+        this.remark = remark;
+    }
+
+    // Getter 및 Setter (생략 가능)
 }

@@ -4,14 +4,14 @@ spring:
   profiles:
     include: ${include}
   datasource:
-    url: ${url}
-    username: ${username}
-    password: ${password}
-    driver-class-name: ${driverClassName}
+    url: jdbc:mysql://localhost:3306/acorn1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: acorn1
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.Oracle12cDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true

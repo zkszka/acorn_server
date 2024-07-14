@@ -5,67 +5,64 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Data;
-
 
 @Entity
 @Table(
-		name = "Gender_GROUP",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "genderGroup"})}
-		)
+    name = "Gender_GROUP",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"customerId", "genderGroup"})}
+)
 public class GenderGroup {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gender_group_seq")
-    @SequenceGenerator(name = "gender_group_seq", sequenceName = "gender_group_seq", allocationSize = 1)
-	private int agegroupId;
-	@Column(nullable = false)
-	private int customerId;
-	private String genderGroup;
-	
-	
-	public int getAgegroupId() {
-		return agegroupId;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySQL에서는 IDENTITY 전략을 사용합니다.
+    @Column(name = "gendergroupId")
+    private int gendergroupId;
 
-	public void setAgegroupId(int agegroupId) {
-		this.agegroupId = agegroupId;
-	}
+    @Column(nullable = false)
+    private int customerId;
 
-	public int getCustomerId() {
-		return customerId;
-	}
+    @Column(name = "genderGroup")
+    private String genderGroup;
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+    public GenderGroup() {
+    }
 
-	public String getGenderGroup() {
-		return genderGroup;
-	}
+    public GenderGroup(int customerId, String genderGroup) {
+        this.customerId = customerId;
+        this.genderGroup = genderGroup;
+    }
 
-	public void setGenderGroup(String genderGroup) {
-		this.genderGroup = genderGroup;
-	}
+    public int getGendergroupId() {
+        return gendergroupId;
+    }
 
-	public GenderGroup() {}
+    public void setGendergroupId(int gendergroupId) {
+        this.gendergroupId = gendergroupId;
+    }
 
-	@Override
-	public String toString() {
-		return "GenderGroup [agegroupId=" + agegroupId + ", customerId=" + customerId + ", genderGroup=" + genderGroup
-				+ "]";
-	}
+    public int getCustomerId() {
+        return customerId;
+    }
 
-	public GenderGroup(int agegroupId, int customerId, String genderGroup) {
-		super();
-		this.agegroupId = agegroupId;
-		this.customerId = customerId;
-		this.genderGroup = genderGroup;
-	}
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
+    public String getGenderGroup() {
+        return genderGroup;
+    }
 
+    public void setGenderGroup(String genderGroup) {
+        this.genderGroup = genderGroup;
+    }
 
-
+    @Override
+    public String toString() {
+        return "GenderGroup{" +
+                "gendergroupId=" + gendergroupId +
+                ", customerId=" + customerId +
+                ", genderGroup='" + genderGroup + '\'' +
+                '}';
+    }
 }

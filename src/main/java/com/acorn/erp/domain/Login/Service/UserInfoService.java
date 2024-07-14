@@ -1,48 +1,44 @@
 package com.acorn.erp.domain.Login.Service;
 
-import java.util.List;
-
+import com.acorn.erp.domain.Login.Entity.UserInfo;
+import com.acorn.erp.domain.Login.Repository.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.acorn.erp.domain.Login.Entity.userInfo;
-import com.acorn.erp.domain.Login.Repository.UserInfoMapper;
+import java.util.List;
 
 @Service
 public class UserInfoService {
-	
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-	
-    public List<userInfo> getAllUserInfo() {
-        return userInfoMapper.getAllUserInfo();
-    }
 
-    public void insertUserInfo(userInfo userinfo) {
-        userInfoMapper.insertUserInfo(userinfo);
-    }
-	
-    public void deleteUserInfo(String email) {
-        userInfoMapper.deleteUserInfo(email);
-    }
-	
-    public void updateUserInfo(userInfo userinfo) {
-        userInfoMapper.updateUserInfo(userinfo);
-        System.out.println("업데이트 성공");
-    }
-    
-    //로그인 관련 매퍼
-    
+    private final UserInfoMapper userInfoMapper;
+
+    @Autowired
     public UserInfoService(UserInfoMapper userInfoMapper) {
         this.userInfoMapper = userInfoMapper;
     }
 
-    public userInfo login(String email, String password) {
+    public List<UserInfo> getAllUserInfo() {
+        return userInfoMapper.getAllUserInfo();
+    }
+
+    public void insertUserInfo(UserInfo userInfo) {
+        userInfoMapper.insertUserInfo(userInfo);
+    }
+
+    public void deleteUserInfo(String email) {
+        userInfoMapper.deleteUserInfo(email);
+    }
+
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfoMapper.updateUserInfo(userInfo);
+        System.out.println("업데이트 성공");
+    }
+
+    public UserInfo login(String email, String password) {
         return userInfoMapper.getUserByEmailAndPassword(email, password);
     }
-    
-  
+
     public String getShopname(String email) {
-    	return userInfoMapper.getShopname(email);
+        return userInfoMapper.getShopName(email);
     }
 }
